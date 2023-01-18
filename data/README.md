@@ -55,6 +55,16 @@ We share the IDs of the tweets in CSV files with the following schema:
 
 **Post relevance label**: see the paper for details. The procedure is not perfect, use with discretion.
 
+# Facebook ads
+
+See `facebook_ads_ids.csv.gz `.
+We share the IDs of the ads in CSV files with the following schema:
+
+| Column    | Note            |
+|-----------|-----------------|
+| id        | ID of the ad |
+
+
 # 4chan data
 
 Since the 4chan data is too large for GitHub, we host it on [zenodo](https://doi.org/10.5281/zenodo.7546057).
