@@ -1,7 +1,10 @@
 # Introduction
 
 Here we release MEIU22, a collection of cross-platform social media posts about the 2022 U.S. midterm elections.
-Details can be found in our paper [A multi-platform collection of social media posts about the 2022 U.S. midterm elections](https://arxiv.org/abs/2301.06287).
+Details can be found in our paper [A multi-platform collection of social media posts about the 2022 U.S. midterm elections](https://arxiv.org
+/abs/2301.06287).
+
+![](architecture.png)
 
 # Repo structure
 - [/code](/code): code used to collect the data
