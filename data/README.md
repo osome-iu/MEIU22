@@ -69,8 +69,9 @@ We share the IDs of the ads in CSV files with the following schema:
 
 Since the 4chan data is too large for GitHub, we host it on [zenodo](https://doi.org/10.5281/zenodo.7546057).
 
-For the archive files, each line is a thread.
+For the archive files, each line is a thread in json format.
 For the snapshot files, each line is a json object containing the snapshots of 4chan's `catalog` endpoint.
 
+**Note**: we did not perform any keyword matching on the 4chan data so not all content is related to the 2022 US midterm elections.
 
 
