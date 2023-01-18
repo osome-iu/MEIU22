@@ -1,0 +1,57 @@
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+#PATH
+MAILTO="your@email"
+HOME=/home/midterm/midterm2022
+# m h  dom mon dow   command
+
+################################################################
+# Facebook data collection
+# start collecting the previous day's posts from 9:00 am (keywords) and 9:05 am (candidates) everyday
+00 09 * * * /data_volume/home/midterm/miniconda3/envs/midterm22_collect/bin/python3 /home/midterm/midterm2022/collect/collect_facebook/crowdtangle_search.py -c config.ini
+05 09 * * * /data_volume/home/midterm/miniconda3/envs/midterm22_collect/bin/python3 /home/midterm/midterm2022/collect/collect_facebook/crowdtangle_get_candidate_list_posts.py -c config.ini
+
+################################################################
+# Facebook ads data collection
+# Start collect previous day's ads from 9:04 pm everyday
+04 21 * * * /data_volume/home/midterm/miniconda3/envs/midterm22_collect/bin/python3 /home/midterm/midterm2022/collect/collect_facebook_ads/fb_ads_collect.py -c config.ini
+
+################################################################
+# 4chan data collection
+# Collect the catalogs, run it every 5 minutes
+*/5 * * * * /data_volume/home/midterm/miniconda3/envs/midterm22_collect/bin/python3 /home/midterm/midterm2022/collect/collect_4chan/download_4chan.py -c config.ini > /dev/null 2>&1
+
+# Collect the archived threads, run it every 10 minutes
+*/10 * * * * /data_volume/home/midterm/miniconda3/envs/midterm22_collect/bin/python3 /home/midterm/midterm2022/collect/collect_4chan/download_archived_threads_4chan.py -c config.ini > /dev/null 2>&1
+
+################################################################
+# Transfer data to analysis machine
+# On 00:10am (for twitter) and 10:10am (for FB and Reddit) every day
+# The % has to be escaped as \%
+10 00,10 * * * rsync -chuzrltgv --out-format="\%n \%'''b" --log-file=/data_volume/midterm2022/logs/rsync/rsync.log /data_volume/midterm2022/data/ analysis:/data_volume/midterm2022/data/
+
+
+################################################################
+# Check the data collection processes are running
+*/10 * * * * /usr/bin/bash /home/midterm/midterm2022/collect/monitor_scripts/check_memory_usage.sh > /dev/null
+*/10 * * * * /usr/bin/bash /home/midterm/midterm2022/collect/monitor_scripts/check_twitter_streamer.sh > /dev/null
