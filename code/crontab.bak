@@ -45,11 +45,20 @@ HOME=/home/midterm/midterm2022
 */10 * * * * /data_volume/home/midterm/miniconda3/envs/midterm22_collect/bin/python3 /home/midterm/midterm2022/collect/collect_4chan/download_archived_threads_4chan.py -c config.ini > /dev/null 2>&1
 
 ################################################################
+# Reddit submissions and comments collection
+# Submissions
+# start collect previous day's submissions from 9:30 am everyday
+57 09 * * * /data_volume/home/midterm/miniconda3/envs/midterm22_reddit/bin/python /home/midterm/midterm2022/collect/collect_reddit/pushshift_search.py -c config.ini -t submission
+
+# Comments
+# start collect previous day's comments from 9:35 am everyday
+35 09 * * * /data_volume/home/midterm/miniconda3/envs/midterm22_reddit/bin/python /home/midterm/midterm2022/collect/collect_reddit/pushshift_search.py -c config.ini -t comment
+
+################################################################
 # Transfer data to analysis machine
 # On 00:10am (for twitter) and 10:10am (for FB and Reddit) every day
 # The % has to be escaped as \%
 10 00,10 * * * rsync -chuzrltgv --out-format="\%n \%'''b" --log-file=/data_volume/midterm2022/logs/rsync/rsync.log /data_volume/midterm2022/data/ analysis:/data_volume/midterm2022/data/
-
 
 ################################################################
 # Check the data collection processes are running
