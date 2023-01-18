@@ -15,10 +15,12 @@ Due to current events in Yemen, Ukraine and Myanmar, advertiser information is t
 - [Documentation on Rate Limits](https://developers.facebook.com/docs/graph-api/overview/rate-limiting/)
 - [How searching is done](https://developers.facebook.com/docs/graph-api/reference/ads_archive/)
 
-We are using https://github.com/facebookresearch/Ad-Library-API-Script-Repository repository as sub module in our fb-ad collection project. To add this sub-module to the project, do the following: <br /><br />
+We are using https://github.com/facebookresearch/Ad-Library-API-Script-Repository repository as sub module in our fb-ad collection project. To add this sub-module to the project, do the following:
 
-git submodule init <br />
-git submodule update <br />
+```sh
+git submodule init
+git submodule update
+```
 
 Further detail is found here:
 https://git-scm.com/book/en/v2/Git-Tools-Submodules
